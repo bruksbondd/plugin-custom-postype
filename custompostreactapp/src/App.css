@@ -6,6 +6,10 @@
 .mask-opacity {
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
+#country-post-react {
+  width: 100%;
+  
+}
 
 @layer base {
   :root {
