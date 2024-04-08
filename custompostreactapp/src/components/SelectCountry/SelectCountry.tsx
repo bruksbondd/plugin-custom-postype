@@ -1,4 +1,4 @@
-import { optionsType } from '@/src/type';
+import { optionsType } from "@/src/type";
 import {
   Select,
   SelectContent,
@@ -6,12 +6,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from "../ui/select";
 
-import style from './SelectCountry.module.css'
+import style from "./SelectCountry.module.css";
 
-import { FC } from 'react';
-import { ScrollArea } from '../ui/scroll-area';
+import { FC, useEffect, useRef } from "react";
+import { ScrollArea } from "../ui/scroll-area";
 
 import {
   Command,
@@ -20,7 +20,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../ui/command';
+} from "../ui/command";
 type propsSearch = {
   setSearch: (e: string) => void;
   options: optionsType[];
@@ -34,47 +34,65 @@ export const SelectCountry: FC<propsSearch> = ({
   options,
   regionId,
   className,
-  search
+  search,
 }) => {
   const handleChange = (e: string) => {
     setSearch(e);
   };
 
+  const inputElement: any = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (inputElement.current) {
+        inputElement?.current?.focus();
+      }
+    }, 100);
+  }, [search, options, inputElement]);
+
   return (
     <div className={className}>
       <Select onValueChange={(e) => handleChange(e)} value={search}>
-        <SelectTrigger className='bg-[#DCE0EC]'>
-          <SelectValue placeholder='Select a country' />
+        <SelectTrigger className="bg-[#DCE0EC]">
+          <SelectValue placeholder="Select a country" />
         </SelectTrigger>
 
-        <SelectContent className='bg-[#fff]'>
-          <Command className='bg-[#fff]'>
-            <CommandInput placeholder='Search' className={`bg-transparent border-none outline-none text-[12px] text-[#BBBCC4] ${style.inputSearch}`} />
+        <SelectContent className="bg-[#fff]">
+          <Command className="bg-[#fff]">
+            <CommandInput
+              placeholder="Search"
+              ref={inputElement}
+              onValueChange={(e) => handleChange(e)}
+             
+              className={`bg-transparent border-none outline-none text-[12px] text-[#BBBCC4] ${style.inputSearch}`}
+            />
+
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
 
-              <ScrollArea className='h-52 '>
-                <CommandGroup >
+              <ScrollArea className="h-52 ">
+                <CommandGroup>
                   <SelectGroup>
-                    {
-                      <CommandItem >
+                  {
+                    <CommandItem>
+                      <SelectItem key="0" value="0">
+                        All countries
+                      </SelectItem>
+                    </CommandItem>
+                  }
+                  {options.map((item) => {
+                    return (
+                      <CommandItem  key={item.id}>
                         <SelectItem
-                          key='0'
-                          value='0'
+                          className="w-full"
+                          key={item.id}
+                          value={item.title}
                         >
-                          All countries
+                          {item.title}
                         </SelectItem>
                       </CommandItem>
-                    }
-                    {options.map((item) => {
-                      return (
-                        <CommandItem >
-                          <SelectItem className='w-full' key={item.id} value={item.title}>
-                            {item.title}
-                          </SelectItem>
-                        </CommandItem>
-                      );
-                    })}
+                    );
+                  })}
                   </SelectGroup>
                 </CommandGroup>
               </ScrollArea>

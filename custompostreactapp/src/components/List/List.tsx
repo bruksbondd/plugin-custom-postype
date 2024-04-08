@@ -18,7 +18,7 @@ export const List: FC<propsList> = ({ postsType }) => {
         >
           <a href={post.link}>
             {post.img && (
-              <img src={post.img} alt='react logo' style={{ width: '400px' }} />
+              <img src={post.img} alt='capital image' className='mx-auto my-[0px]' style={{ width: '400px' }} />
             )}
             <CardHeader className=' flex flex-row justify-between pb-[6px]'>
               <CardTitle className='group-hover/edit:text-[#1255E1] text-[20px] '>
@@ -30,9 +30,11 @@ export const List: FC<propsList> = ({ postsType }) => {
               <div className='my-[5px]'>
                 <div className='flex'>
                   <img
+                    
                     width='16'
                     src='https://swivelt.com/wp-content/uploads/2024/02/capital-1.svg'
                     alt='capital'
+                    title='capital'
                   />
                   <div className='text-[16px] text-[#2E2E43] opacity-30 mx-[9px]'>
                     Capital

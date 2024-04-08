@@ -11,6 +11,8 @@ function App() {
   const [search, setSearch] = useState('');
   const [regionId, setRegionId] = useState('');
 
+
+
   let route = '';
   if (
     window.location.hostname === 'localhost' ||
@@ -19,11 +21,17 @@ function App() {
     route = 'https://swivelt.com';
   }
 
+  let all = '4';
+
+  if (window.location.href.indexOf("global-guide") > -1) {
+    all = '0'
+  }
+
   useEffect(() => {
    
     axios
       .get(
-        `${route}/wp-json/react_api/v1/country?number=${regionId === '0' || search === '0' ? -1 : 4}${
+        `${route}/wp-json/react_api/v1/country?number=${regionId === '0' || search === '0' || all === '0' ? -1 : 4}${
           search && '&search=' + search
         }${regionId && '&region=' + regionId}`,
       )
