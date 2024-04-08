@@ -1,14 +1,14 @@
 <?php
 /**
  * @package Country_post_type
- * @version 1.4
+ * @version 2.8
  */
 /*
 Plugin Name: Country Post Type [country-post]
 Plugin URI: http://wordpress.org/extend/plugins/#
 Description: This is an custom post type with shortcode [country-post]
 Author: Bruks Bond
-Version: 1.4
+Version: 2.8
 Author URI: https://mintsplash.net/
 */
 
